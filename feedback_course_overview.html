@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback Mastery — Course Overview</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f7f6f2;
+      color: #1a1a18;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .course-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .course-header {
+      margin-bottom: 2rem;
+    }
+
+    .course-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888780;
+      margin-bottom: 6px;
+    }
+
+    .course-title {
+      font-size: 22px;
+      font-weight: 500;
+      color: #1a1a18;
+      margin-bottom: 4px;
+    }
+
+    .course-sub {
+      font-size: 14px;
+      color: #5f5e5a;
+    }
+
+    .chapter-card {
+      background: #ffffff;
+      border: 0.5px solid #e0ded6;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .chapter-card:hover {
+      border-color: #b4b2a9;
+    }
+
+    .chapter-card.open {
+      border-color: #888780;
+    }
+
+    .chapter-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ch-num {
+      font-size: 11px;
+      font-weight: 500;
+      color: #185fa5;
+      background: #e6f1fb;
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+
+    .ch-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #1a1a18;
+      flex: 1;
+    }
+
+    .ch-arrow {
+      font-size: 16px;
+      color: #b4b2a9;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+
+    .chapter-card.open .ch-arrow {
+      transform: rotate(90deg);
+    }
+
+    .ch-body {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 0.5px solid #e0ded6;
+    }
+
+    .chapter-card.open .ch-body {
+      display: block;
+    }
+
+    .ch-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .tag-purple { background: #EEEDFE; color: #3C3489; }
+    .tag-teal   { background: #E1F5EE; color: #085041; }
+    .tag-coral  { background: #FAECE7; color: #712B13; }
+    .tag-pink   { background: #FBEAF0; color: #72243E; }
+    .tag-amber  { background: #FAEEDA; color: #633806; }
+    .tag-blue   { background: #E6F1FB; color: #0C447C; }
+    .tag-green  { background: #EAF3DE; color: #27500A; }
+    .tag-gray   { background: #F1EFE8; color: #444441; }
+
+    .ch-what {
+      font-size: 13px;
+      color: #5f5e5a;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .ch-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .ch-meta-item {
+      background: #f7f6f2;
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .ch-meta-label {
+      font-size: 11px;
+      color: #888780;
+      margin-bottom: 2px;
+    }
+
+    .ch-meta-val {
+      font-size: 13px;
+      color: #1a1a18;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .ch-benefit {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #5f5e5a;
+      background: #f7f6f2;
+      border-radius: 8px;
+      padding: 8px 10px;
+      border-left: 2px solid #378add;
+      line-height: 1.5;
+    }
+
+    .ch-benefit strong {
+      color: #1a1a18;
+      font-weight: 500;
+    }
+
+    .footer-note {
+      font-size: 13px;
+      color: #888780;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .ch-meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="course-wrap">
+    <div class="course-header">
+      <p class="course-label">Designer upskilling · 8 chapters</p>
+      <p class="course-title">Feedback Mastery — Course Overview</p>
+      <p class="course-sub">Click each chapter to expand · Built for Lead Designer promotion</p>
+    </div>
+
+    <div id="chapters"></div>
+
+    <p class="footer-note">Shared for review — feel free to suggest additions or changes.</p>
+  </div>
+
+  <script>
+    const chapters = [
+      {
+        num: "Ch 1", title: "What feedback actually is",
+        tag: "tag-purple", tagLabel: "Foundation",
+        what: "Separates feedback, critique, and judgment — three things most designers accidentally mix up. Lays the vocabulary for everything that follows.",
+        source: "Thanks for the Feedback — Stone & Heen",
+        skill: "Knowing which type of feedback you're giving before you speak",
+        benefit: "You stop accidentally evaluating people when they needed coaching — a common lead blind spot."
+      },
+      {
+        num: "Ch 2", title: "Your feedback style + blind spots",
+        tag: "tag-teal", tagLabel: "Self-awareness",
+        what: "Maps your default tendencies and where they break down. Most designers land in 'ruinous empathy' — kind but not honest.",
+        source: "Radical Candor — Kim Scott",
+        skill: "Identifying your own patterns before they cause friction",
+        benefit: "Self-awareness you can describe out loud to your manager with a clear framework behind it."
+      },
+      {
+        num: "Ch 3", title: "Understanding the receiver",
+        tag: "tag-coral", tagLabel: "Empathy",
+        what: "Teaches you to adapt feedback to the person, not just the work. Seniority, confidence, and trust level all change what lands.",
+        source: "Thanks for the Feedback + Edmondson (psych safety)",
+        skill: "Reading the room before you give feedback",
+        benefit: "Fewer defensive reactions, more productive conversations — especially with junior designers."
+      },
+      {
+        num: "Ch 4", title: "The SBI model",
+        tag: "tag-blue", tagLabel: "Core framework",
+        what: "Situation → Behavior → Impact. The most practical structure you'll use daily. Turns vague feedback into something specific and inarguable.",
+        source: "Center for Creative Leadership",
+        skill: "Giving feedback that is precise, not personal",
+        benefit: "Your feedback becomes specific and inarguable instead of vague and dismissable."
+      },
+      {
+        num: "Ch 5", title: "Work vs identity",
+        tag: "tag-pink", tagLabel: "Psychology",
+        what: "Keeps feedback about the design, not the designer's worth. Identity threat is why good feedback still lands badly.",
+        source: "Dweck (growth mindset) + Stone & Heen",
+        skill: "Separating the work from the person giving it",
+        benefit: "Junior designers stop shutting down when you critique their work."
+      },
+      {
+        num: "Ch 6", title: "Handling pushback",
+        tag: "tag-amber", tagLabel: "Resilience",
+        what: "What to do when someone gets defensive or argues back. Pushback is data, not failure — learn to stay in the conversation.",
+        source: "Radical Candor + Thanks for the Feedback",
+        skill: "Staying calm and useful when someone disagrees",
+        benefit: "You don't cave OR escalate — you stay useful. A visible sign of lead-level maturity."
+      },
+      {
+        num: "Ch 7", title: "Facilitating group critiques",
+        tag: "tag-green", tagLabel: "Leadership",
+        what: "How to run a design review where everyone contributes and no one dominates. Structure replaces chaos.",
+        source: "Adam Connor & Aaron Irizarry + The Futur",
+        skill: "Running crits that are structured, not free-for-alls",
+        benefit: "Your crits become consistent and productive — one of the most visible lead designer skills."
+      },
+      {
+        num: "Ch 8", title: "Building a feedback culture",
+        tag: "tag-gray", tagLabel: "Lead mindset",
+        what: "Shifts from giving feedback to creating an environment where it flows naturally. This is the promotion chapter.",
+        source: "All sources — Edmondson, Scott, Stone & Heen",
+        skill: "Making the whole team better at feedback, not just yourself",
+        benefit: "Your promotion evidence: you're not just good at feedback — you make the whole team better at it."
+      }
+    ];
+
+    const container = document.getElementById('chapters');
+    chapters.forEach(ch => {
+      const card = document.createElement('div');
+      card.className = 'chapter-card';
+      card.innerHTML = `
+        <div class="chapter-row">
+          <span class="ch-num">${ch.num}</span>
+          <span class="ch-title">${ch.title}</span>
+          <span class="ch-arrow">›</span>
+        </div>
+        <div class="ch-body">
+          <span class="ch-tag ${ch.tag}">${ch.tagLabel}</span>
+          <p class="ch-what">${ch.what}</p>
+          <div class="ch-meta">
+            <div class="ch-meta-item">
+              <p class="ch-meta-label">Source</p>
+              <p class="ch-meta-val">${ch.source}</p>
+            </div>
+            <div class="ch-meta-item">
+              <p class="ch-meta-label">Key skill</p>
+              <p class="ch-meta-val">${ch.skill}</p>
+            </div>
+          </div>
+          <div class="ch-benefit"><strong>Work benefit:</strong> ${ch.benefit}</div>
+        </div>
+      `;
+      card.addEventListener('click', () => card.classList.toggle('open'));
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
